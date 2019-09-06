@@ -1,0 +1,5 @@
+package com.javadb.domain;
+
+public class BoardVO {
+
+}

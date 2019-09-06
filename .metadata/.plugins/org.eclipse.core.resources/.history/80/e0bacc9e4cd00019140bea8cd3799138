@@ -1,0 +1,5 @@
+package com.javadb.persistence;
+
+public interface BoardDAO {
+
+}

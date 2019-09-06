@@ -1,0 +1,35 @@
+<?xml	version="1.0"	encoding="UTF-8"?> 
+<!DOCTYPE mapper
+	PUBLIC	 "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javadb.mapper.BoardMapper">
+	<insert id="create"> <!-- DAO와 매핑을 위한 ID -->
+		INSERT INTO tbl_board(title, content, writer)
+		VALUES(#{title}, #{content}, #{writer})
+	</insert>
+	<!-- Read 게시물 읽기 -->
+	<select id="read" resultType="com.swcodingschool.domain.BoardVO"> <!-- 데이터를 받아오기 위 한 resultType 명시 -->
+		SELECT bno, title, content, writer, regdate, viewcnt
+		FROM tbl_board
+		WHERE bno = #{bno}
+	</select>
+	<!-- Update 게시글 수정 -->
+	<update id="update">
+		UPDATE tbl_board SET title=#{title}, content=#{content}
+		WHERE bno = #{bno}
+	</update>
+	<!-- Delete 삭제 -->
+	<delete id="delete">
+		DELETE FROM tbl_board WHERE bno = #{bno}
+	</delete>
+	<!-- ListAll 전체 글 목록 -->
+	<select id="listAll"
+		resultType="com.swcodingschool.domain.BoardVO"> <!-- SQL내부에 연산자가 있을 경우 ![CDATA[ ]] 사용 -->
+<![CDATA[
+SELECT bno, title, content, writer, regdate, viewcnt
+FROM tbl_board
+WHERE bno > 0
+ORDER BY bno DESC, regdate DESC
+]]>
+	</select>
+</mapper>
